@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page not found</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <style>
+        body { padding: 40px; font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 700px; margin: auto; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>404 - Không tìm thấy trang</h1>
+    <p>Trang bạn yêu cầu không tồn tại hoặc đã được di chuyển.</p>
+    <p>
+        <a th:href="@{/}" class="btn btn-primary">Về trang chủ</a>
+    </p>
+</div>
+</body>
+</html>

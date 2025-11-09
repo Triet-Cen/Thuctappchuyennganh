@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Category & Product</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <style>
+        body { padding: 24px; }
+        .table thead th { background: #f8f9fa; }
+        .badge { font-size: 90%; }
+        .page-header { margin-bottom: 24px; }
+        .actions .btn { margin-right: 6px; }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="page-header">
+        <h2>Trang quản trị</h2>
+        <p>
+            <a th:href="@{/index}" class="btn btn-link">← Về trang chủ</a>
+            <a th:href="@{/logout}" class="btn btn-outline-secondary" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Đăng xuất</a>
+        </p>
+        <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;"></form>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header"><h4>Danh mục</h4></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên danh mục</th>
+                                <th>Số lượng</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="c : ${categories}">
+                                <td th:text="${c.id}"></td>
+                                <td th:text="${c.name}"></td>
+                                <td th:text="${c.quantity}"></td>
+                                <td>
+                                    <span th:text="${c.status}"
+                                          th:classappend="${c.status=='Hoạt động'} ? 'badge badge-success' : 'badge badge-secondary'"></span>
+                                </td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-pencil"></i> Sửa</button>
+                                    <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i> Xóa</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header"><h4>Sản phẩm</h4></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="p : ${products}">
+                                <td th:text="${p.id}"></td>
+                                <td th:text="${p.name}"></td>
+                                <td th:text="${p.quantity}"></td>
+                                <td>
+                                    <span th:text="${p.status}"
+                                          th:classappend="${p.status=='Còn hàng'} ? 'badge badge-success' : 'badge badge-warning'"></span>
+                                </td>
+                                <td class="actions">
+                                    <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-pencil"></i> Sửa</button>
+                                    <button class="btn btn-sm btn-danger" type="button"><i class="fa fa-trash"></i> Xóa</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
