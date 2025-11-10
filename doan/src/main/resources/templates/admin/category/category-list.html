@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý danh mục</title>
+</head>
+<body>
+<!-- Sử dụng layout admin -->
+<div th:replace="~{admin/layout :: layout(~{::section})}">
+    <section>
+
+        <h2 class="page-title mb-3">Category List</h2>
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <a href="#" class="fw-semibold text-primary text-decoration-none">Danh sách Danh mục Điện thoại</a>
+                <a href="#" class="btn btn-success btn-sm"><i class="fa fa-plus me-1"></i> Thêm Danh mục</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                        <tr>
+                            <th style="width:100px">ID</th>
+                            <th>Tên Danh mục</th>
+                            <th style="width:140px">Số lượng SP</th>
+                            <th style="width:120px">Trạng thái</th>
+                            <th style="width:140px">Thao tác</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>#C001</td>
+                            <td>iPhone 17 Series</td>
+                            <td>45</td>
+                            <td><span class="badge badge-pill bg-success">Hiển thị</span></td>
+                            <td>
+                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#C002</td>
+                            <td>iPhone 16 Series</td>
+                            <td>78</td>
+                            <td><span class="badge badge-pill bg-success">Hiển thị</span></td>
+                            <td>
+                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#C003</td>
+                            <td>iPhone 15 Series</td>
+                            <td>102</td>
+                            <td><span class="badge badge-pill bg-success">Hiển thị</span></td>
+                            <td>
+                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#C004</td>
+                            <td>iPhone 14 Series</td>
+                            <td>60</td>
+                            <td><span class="badge badge-pill bg-success">Hiển thị</span></td>
+                            <td>
+                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#C005</td>
+                            <td>Phụ kiện Apple</td>
+                            <td>0</td>
+                            <td><span class="badge badge-pill bg-warning text-dark">Ẩn</span></td>
+                            <td>
+                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

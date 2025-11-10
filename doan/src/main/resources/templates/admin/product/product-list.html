@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý sản phẩm</title>
+</head>
+<body>
+<div th:replace="~{admin/layout :: layout(~{::section})}">
+    <section>
+
+        <h2 class="page-title mb-3">Product List</h2>
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <a href="#" class="fw-semibold text-primary text-decoration-none">Danh sách Sản phẩm</a>
+                <a href="#" class="btn btn-success btn-sm"><i class="fa fa-plus me-1"></i> Thêm Sản phẩm</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                        <tr>
+                            <th style="width:100px">Mã</th>
+                            <th>Tên sản phẩm</th>
+                            <th style="width:140px">Tồn kho</th>
+                            <th style="width:120px">Trạng thái</th>
+                            <th style="width:140px">Thao tác</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>#P101</td>
+                            <td>iPhone 15</td>
+                            <td>15</td>
+                            <td><span class="badge badge-pill bg-success">Còn hàng</span></td>
+                            <td>
+                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#P102</td>
+                            <td>Samsung Galaxy S24</td>
+                            <td>12</td>
+                            <td><span class="badge badge-pill bg-success">Còn hàng</span></td>
+                            <td>
+                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#P105</td>
+                            <td>Chuột Logitech MX Master 3S</td>
+                            <td>18</td>
+                            <td><span class="badge badge-pill bg-warning text-dark">Sắp hết</span></td>
+                            <td>
+                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

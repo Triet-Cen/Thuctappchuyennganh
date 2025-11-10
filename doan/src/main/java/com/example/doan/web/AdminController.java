@@ -32,6 +32,18 @@ public class AdminController {
 
         model.addAttribute("categories", categories);
         model.addAttribute("products", products);
-        return "admin"; // templates/admin.html
+        return "admin"; // templates/admin.html (tổng quan)
+    }
+
+    @GetMapping("/admin/category")
+    public String adminCategory() {
+        // Trả về trang quản lý danh mục riêng
+        return "admin/category/category-list";
+    }
+
+    @GetMapping("/admin/product")
+    public String adminProduct() {
+        // Trả về trang quản lý sản phẩm riêng
+        return "admin/product/product-list";
     }
 }

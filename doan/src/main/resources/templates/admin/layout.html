@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:replace="~{::title}">Admin Layout</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-custom.css}">
+    <style>
+        body{background:#f5f6f8;}
+        .admin-navbar{background:#111827;color:#fff;padding:12px 16px;}
+        .admin-brand{font-weight:600;}
+        .admin-sidebar{width:240px;background:#1f2937;min-height:100vh;color:#d1d5db;position:fixed;top:48px;bottom:0;left:0;}
+        .admin-sidebar a{display:block;color:#d1d5db;padding:12px 16px;text-decoration:none;}
+        .admin-sidebar a:hover{background:#374151;color:#fff;}
+        .admin-content{margin-left:240px;padding:24px;margin-top:48px;}
+        .admin-footer{padding:16px;color:#6b7280;text-align:center;}
+        .badge{font-size:90%;}
+    </style>
+</head>
+<body>
+<div th:fragment="layout(content)">
+<!-- Top bar -->
+<div class="admin-navbar d-flex align-items-center justify-content-between">
+    <div class="admin-brand">
+        <i class="fa fa-cogs"></i>
+        <span>Trang quản trị</span>
+    </div>
+    <div>
+        <a th:href="@{/}" class="text-light me-3" style="text-decoration:none"><i class="fa fa-home"></i> Trang chủ</a>
+        <a th:href="@{/admin}" class="text-light me-3" style="text-decoration:none"><i class="fa fa-dashboard"></i> Tổng quan</a>
+        <a th:href="@{/logout}" class="btn btn-sm btn-outline-light" onclick="event.preventDefault();document.getElementById('logoutForm').submit();">Đăng xuất</a>
+        <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none"></form>
+    </div>
+</div>
+
+<!-- Sidebar -->
+<nav class="admin-sidebar">
+    <div class="px-3 py-2 text-uppercase small text-secondary">Quản lý</div>
+    <a th:href="@{/admin/category}" class="d-flex align-items-center"><i class="fa fa-folder-open me-2"></i> Danh mục</a>
+    <a th:href="@{/admin/product}" class="d-flex align-items-center"><i class="fa fa-cube me-2"></i> Sản phẩm</a>
+</nav>
+
+<!-- Main content container -->
+<main class="admin-content">
+    <div th:insert="${content}">
+        <!-- Nội dung trang con sẽ hiển thị tại đây -->
+        <div class="card">
+            <div class="card-body">
+                <h4>Xin chào!</h4>
+                <p>Đây là layout mặc định cho trang quản trị.</p>
+            </div>
+        </div>
+    </div>
+    <div class="admin-footer">© <span th:text="${#dates.format(#dates.createNow(),'yyyy')}"></span> - Admin Panel</div>
+</main>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</div>
+</body>
+</html>
