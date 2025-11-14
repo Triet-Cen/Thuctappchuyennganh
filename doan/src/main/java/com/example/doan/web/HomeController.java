@@ -8,7 +8,7 @@ public class HomeController {
 
     @GetMapping({"/", "/index"})
     public String index() {
-        // Renders src/main/resources/templates/index.html via Thymeleaf
         return "index";
     }
+
 }
