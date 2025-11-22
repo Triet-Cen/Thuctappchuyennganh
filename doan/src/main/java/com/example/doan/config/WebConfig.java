@@ -9,18 +9,29 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Serve static assets located under templates/ so index.html can load them
+        // Serve assets from BOTH templates/ and static/ so existing paths keep working
         registry.addResourceHandler("/css/**")
-                .addResourceLocations("classpath:/templates/css/");
+                .addResourceLocations(
+                        "classpath:/templates/css/",
+                        "classpath:/static/css/");
         registry.addResourceHandler("/js/**")
-                .addResourceLocations("classpath:/templates/js/");
+                .addResourceLocations(
+                        "classpath:/templates/js/",
+                        "classpath:/static/js/");
         registry.addResourceHandler("/img/**")
-                .addResourceLocations("classpath:/templates/img/");
+                .addResourceLocations(
+                        "classpath:/templates/img/",
+                        "classpath:/static/img/");
         registry.addResourceHandler("/fonts/**")
-                .addResourceLocations("classpath:/templates/fonts/");
+                .addResourceLocations(
+                        "classpath:/templates/fonts/",
+                        "classpath:/static/fonts/");
         registry.addResourceHandler("/electro-master/**")
                 .addResourceLocations("classpath:/templates/electro-master/");
-        // Also expose anything under /static/ (default) just in case
+        // Map vendor assets used by login page
+        registry.addResourceHandler("/vendor/**")
+                .addResourceLocations("classpath:/static/css/vendor/");
+        // Also expose anything under /static/
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
     }
