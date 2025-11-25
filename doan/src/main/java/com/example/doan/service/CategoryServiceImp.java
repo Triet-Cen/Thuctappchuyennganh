@@ -1,0 +1,39 @@
+package com.example.doan.service;
+
+import com.example.doan.dao.CategoryDAO;
+import com.example.doan.entity.Category;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CategoryServiceImp implements CategoryService {  // PHẢI IMPLEMENT INTERFACE
+
+    private final CategoryDAO categoryDAO;
+
+    @Autowired
+    public CategoryServiceImp(CategoryDAO categoryDAO) {
+        this.categoryDAO = categoryDAO;
+    }
+
+    @Override
+    public List<Category> findAll() {
+        return categoryDAO.findAll();
+    }
+
+    @Override
+    public Category findById(int id) {
+        return categoryDAO.findById(id);
+    }
+
+    @Override
+    public Category save(Category category) {
+        return categoryDAO.save(category);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        categoryDAO.deleteById(id);
+    }
+}
