@@ -1,58 +1,69 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head th:replace="~{admin/layout :: adminHead}"></head>
 <body>
+
 <div th:replace="~{admin/layout :: layout(~{::section})}">
-    <section>
+    <section class="py-4">
+        <div class="container-fluid mt-4">
+            <h3 class="mb-4">Quản lý sản phẩm</h3>
 
-        <h2 class="page-title mb-3">Product List</h2>
-
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <a href="#" class="fw-semibold text-primary text-decoration-none">Danh sách Sản phẩm</a>
-                <a href="#" class="btn btn-success btn-sm"><i class="fa fa-plus me-1"></i> Thêm Sản phẩm</a>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle">
+            <div class="card">
+                <div class="card-body p-0">
+                    <table class="table table-bordered table-hover mb-0">
                         <thead class="table-light">
-                        <tr>
-                            <th style="width:100px">Mã</th>
-                            <th>Tên sản phẩm</th>
-                            <th style="width:140px">Tồn kho</th>
-                            <th style="width:120px">Trạng thái</th>
-                            <th style="width:140px">Thao tác</th>
+                        <tr class="text-center align-middle">
+                            <th width="5%">ID</th>
+                            <th width="15%">Hình ảnh</th>
+                            <th width="25%">Tên sản phẩm</th>
+                            <th width="15%">Giá</th>
+                            <th width="15%">Danh mục</th>
+                            <th width="10%">Trạng thái</th>
+                            <th width="15%">Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#P101</td>
-                            <td>iPhone 15</td>
-                            <td>15</td>
-                            <td><span class="badge badge-pill bg-success">Còn hàng</span></td>
+                        <tr th:each="product : ${products}" class="align-middle text-center">
+                            <td th:text="${product.id}"></td>
+
                             <td>
-                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
-                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+                                <img th:src="${product.image}"
+                                     alt="Product Image"
+                                     width="80"
+                                     height="60"
+                                     class="rounded shadow-sm"
+                                     style="object-fit: cover; border: 1px solid #ddd;"
+                                     onerror="this.src='https://via.placeholder.com/80x60/E3E6EA/6C757D?text=No+Image'" />
+                            </td>
+
+                            <td class="text-start ps-4" th:text="${product.name}"></td>
+
+                            <td class="fw-bold text-danger"
+                                th:text="${product.price != null ? (#numbers.formatDecimal(product.price, 3, 'COMMA', 3, 'POINT') + ' đ') : '0 đ'}">
+                            </td>
+
+                            <td>Chưa có danh mục</td>
+
+                            <td>
+                                <span class="badge"
+                                      th:class="${product.status == 1} ? 'bg-success' : 'bg-secondary'"
+                                      th:text="${product.status == 1} ? 'Hiển thị' : 'Ẩn'"></span>
+                            </td>
+
+                            <td>
+                                <a th:href="@{/admin/product/edit/{id}(id=${product.id})}"
+                                   class="btn btn-sm btn-warning">Sửa</a>
+                                <a th:href="@{/admin/product/delete/{id}(id=${product.id})}"
+                                   th:data-name="${product.name}"
+                                   onclick="return confirmDelete(this)"
+                                   class="btn btn-sm btn-danger">Xóa</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>#P102</td>
-                            <td>Samsung Galaxy S24</td>
-                            <td>12</td>
-                            <td><span class="badge badge-pill bg-success">Còn hàng</span></td>
-                            <td>
-                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
-                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#P105</td>
-                            <td>Chuột Logitech MX Master 3S</td>
-                            <td>18</td>
-                            <td><span class="badge badge-pill bg-warning text-dark">Sắp hết</span></td>
-                            <td>
-                                <button class="btn btn-info text-white btn-square btn-sm" title="Sửa"><i class="fa fa-pencil"></i></button>
-                                <button class="btn btn-danger btn-square btn-sm" title="Xóa"><i class="fa fa-minus"></i></button>
+
+                        <!-- Trường hợp không có dữ liệu -->
+                        <tr th:if="${products.isEmpty()}">
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                Chưa có sản phẩm nào
                             </td>
                         </tr>
                         </tbody>
@@ -62,5 +73,14 @@
         </div>
     </section>
 </div>
+
+<!-- Thêm script để xử lý confirm -->
+<script>
+    function confirmDelete(link) {
+        var productName = link.getAttribute('data-name');
+        return confirm('Bạn có chắc muốn xóa sản phẩm "' + productName + '"?');
+    }
+</script>
+
 </body>
 </html>
