@@ -21,16 +21,6 @@ public class SecurityConfig {
         return new JdbcUserDetailsManager(dataSource);
     }
 
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsManager() {
-//        UserDetails xuanbac = User.builder()
-//                .username("user")
-//                .password("{noop}123")
-//                .roles("EMPLOYEE","ADMIN")
-//                .build();
-//        return new InMemoryUserDetailsManager(xuanbac);
-//    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(configurer ->
