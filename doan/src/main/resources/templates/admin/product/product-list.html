@@ -7,7 +7,9 @@
     <section class="py-4">
         <div class="container-fluid mt-4">
             <h3 class="mb-4">Quản lý sản phẩm</h3>
-
+            <div class="mb-3 text-end">
+                <a th:href="@{/admin/product/add}" class="btn btn-primary">Thêm sản phẩm mới</a>
+            </div>
             <div class="card">
                 <div class="card-body p-0">
                     <table class="table table-bordered table-hover mb-0">
@@ -50,17 +52,28 @@
                                       th:text="${product.status == 1} ? 'Hiển thị' : 'Ẩn'"></span>
                             </td>
 
-                            <td>
+
+                            <td class="text-center">
                                 <a th:href="@{/admin/product/edit/{id}(id=${product.id})}"
-                                   class="btn btn-sm btn-warning">Sửa</a>
-                                <a th:href="@{/admin/product/delete/{id}(id=${product.id})}"
-                                   th:data-name="${product.name}"
-                                   onclick="return confirmDelete(this)"
-                                   class="btn btn-sm btn-danger">Xóa</a>
+                                   class="btn btn-sm btn-warning me-1">
+                                    Sửa
+                                </a>
+
+
+                                <form th:action="@{/admin/product/delete/{id}(id=${product.id})}"
+                                      method="post"
+                                      style="display: inline;">
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger"
+                                            th:attr="data-name=${product.name}"
+                                            onclick="return confirmDelete(this)">
+                                        Xóa
+                                    </button>
+                                </form>
                             </td>
                         </tr>
 
-                        <!-- Trường hợp không có dữ liệu -->
+
                         <tr th:if="${products.isEmpty()}">
                             <td colspan="7" class="text-center py-5 text-muted">
                                 Chưa có sản phẩm nào
@@ -73,14 +86,12 @@
         </div>
     </section>
 </div>
-
-<!-- Thêm script để xử lý confirm -->
-<script>
-    function confirmDelete(link) {
-        var productName = link.getAttribute('data-name');
-        return confirm('Bạn có chắc muốn xóa sản phẩm "' + productName + '"?');
-    }
-</script>
-
 </body>
 </html>
+
+<script>
+    function confirmDelete(button) {
+        const name = button.getAttribute('data-name') || 'này';
+        return confirm('Bạn có chắc muốn xóa sản phẩm "' + name + '" không?');
+    }
+</script>

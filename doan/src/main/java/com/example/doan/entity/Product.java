@@ -17,8 +17,8 @@ public class Product {
     private int status;
     @Column(name="description")
     private String description;
-//    @Column(name="id_cate")
-//    private int id_cate;
+    @Column(name="id_cate")
+    private Integer idCate;
     @Column(name="content")
     private String content;
     @Column(name="name")
@@ -62,7 +62,7 @@ public class Product {
         this.image = image;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
@@ -84,6 +84,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getIdCate() {
+        return idCate;
+    }
+
+    public void setIdCate(Integer idCate) {
+        this.idCate = idCate;
     }
 
     public String getContent() {
@@ -111,6 +119,7 @@ public class Product {
                 ", price=" + price +
                 ", status=" + status +
                 ", description='" + description + '\'' +
+                ", idCate=" + idCate +
                 ", content='" + content + '\'' +
                 ", name='" + name + '\'' +
                 '}';

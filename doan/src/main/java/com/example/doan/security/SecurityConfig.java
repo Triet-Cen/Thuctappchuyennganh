@@ -7,26 +7,35 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
-
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails xuanbac = User.builder()
-                .username("user")
-                .password("{noop}123")
-                .roles("EMPLOYEE","ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(xuanbac);
+    public UserDetailsManager userDetailsManager(DataSource dataSource){
+
+        return new JdbcUserDetailsManager(dataSource);
     }
+
+//    @Bean
+//    public InMemoryUserDetailsManager userDetailsManager() {
+//        UserDetails xuanbac = User.builder()
+//                .username("user")
+//                .password("{noop}123")
+//                .roles("EMPLOYEE","ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(xuanbac);
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/admin/**").hasRole("MANAGER")
                                 .anyRequest()
                                 .permitAll()
                 )

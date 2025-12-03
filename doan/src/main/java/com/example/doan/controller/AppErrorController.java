@@ -1,4 +1,4 @@
-package com.example.doan.web;
+package com.example.doan.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.web.error.ErrorAttributeOptions;

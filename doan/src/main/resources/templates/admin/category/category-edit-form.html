@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: adminHead}"></head>
+<body>
+<div th:replace="~{admin/layout :: layout(~{::section})}">
+    <section class="py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- BỌC FORM TRONG CỘT GIỮA -->
+                <div class="col-lg-6 col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4 text-center">Chỉnh sửa danh mục</h4>
+
+                            <form th:action="@{/admin/category/save}" method="post" th:object="${category}">
+                                <input type="hidden" th:field="*{id}">
+
+                                <!-- NAME -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label fw-bold">Tên danh mục</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="name"
+                                           th:field="*{name}"
+                                           placeholder="Nhập tên danh mục"
+                                           required>
+                                </div>
+
+                                <!-- IMAGE -->
+                                <div class="mb-3">
+                                    <label for="image" class="form-label fw-bold">Hình ảnh (URL)</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="image"
+                                           th:field="*{image}"
+                                           placeholder="https://example.com/image.jpg">
+                                </div>
+
+                                <!-- STATUS -->
+                                <div class="mb-4">
+                                    <label for="status" class="form-label fw-bold">Trạng thái</label>
+                                    <select th:field="*{status}" class="form-select" id="status">
+                                        <option value="1">Hoạt động</option>
+                                        <option value="0">Ẩn</option>
+                                    </select>
+                                </div>
+
+                                <!-- NÚT -->
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="submit" class="btn btn-primary me-md-2">
+                                        Cập nhật
+                                    </button>
+                                    <a th:href="@{/admin/category/category-list}" class="btn btn-secondary">
+                                        Quay lại
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

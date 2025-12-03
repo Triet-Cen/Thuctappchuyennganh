@@ -1,6 +1,5 @@
 package com.example.doan.dao;
 
-import com.example.doan.entity.Category;
 import com.example.doan.entity.Product;
 
 import java.util.List;

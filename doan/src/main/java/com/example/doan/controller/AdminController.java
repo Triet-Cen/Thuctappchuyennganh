@@ -1,4 +1,4 @@
-package com.example.doan.web;
+package com.example.doan.controller;
 
 
 import com.example.doan.entity.Category;

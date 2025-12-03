@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
@@ -28,16 +29,20 @@ public class ProductDAOImp implements ProductDAO {
 
     @Override
     public Product findById(int id) {
-        return null;
+        return em.find(Product.class,id);
     }
 
     @Override
+    @Transactional
     public Product save(Product product) {
-        return null;
+        Product saved= em.merge(product);
+        return saved;
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
-
+        Product product=em.find(Product.class,id);
+        em.remove(product);
     }
 }

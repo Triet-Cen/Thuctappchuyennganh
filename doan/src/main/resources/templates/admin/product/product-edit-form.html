@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: adminHead}"></head>
+<body>
+<div th:replace="~{admin/layout :: layout(~{::section})}">
+    <section class="py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-warning text-dark">
+                            <h4 class="mb-0 text-center">Chỉnh sửa sản phẩm</h4>
+                        </div>
+                        <div class="card-body">
+
+                            <form th:action="@{/admin/product/save}"
+                                  method="post"
+                                  th:object="${product}">
+
+                                <input type="hidden" th:field="*{id}">
+
+                                <!-- TÊN SẢN PHẨM -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Tên sản phẩm <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" th:field="*{name}" required>
+                                </div>
+
+                                <!-- TIÊU ĐỀ -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Tiêu đề (SEO)</label>
+                                    <input type="text" class="form-control" th:field="*{title}">
+                                </div>
+
+                                <!-- DANH MỤC -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Danh mục <span class="text-danger">*</span></label>
+                                    <select th:field="*{idCate}" class="form-select" required>
+                                        <option value="">-- Chọn danh mục --</option>
+                                        <option th:each="cat : ${categories}"
+                                                th:value="${cat.id}"
+                                                th:text="${cat.name}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- GIÁ -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Giá bán (VNĐ) <span class="text-danger">*</span></label>
+                                    <input type="number" step="0.01" class="form-control" th:field="*{price}" required>
+                                </div>
+
+                                <!-- HÌNH ẢNH -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Hình ảnh (URL)</label>
+                                    <input type="text" class="form-control" th:field="*{image}">
+                                </div>
+
+                                <!-- TRẠNG THÁI -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Trạng thái</label>
+                                    <select th:field="*{status}" class="form-select">
+                                        <option value="1">Hiển thị</option>
+                                        <option value="0">Ẩn</option>
+                                    </select>
+                                </div>
+
+                                <!-- MÔ TẢ NGẮN -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Mô tả ngắn</label>
+                                    <textarea class="form-control" th:field="*{description}" rows="3"></textarea>
+                                </div>
+
+                                <!-- NỘI DUNG -->
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Nội dung chi tiết</label>
+                                    <textarea class="form-control" th:field="*{content}" rows="6"></textarea>
+                                </div>
+
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="submit" class="btn btn-warning me-md-2">
+                                        Cập nhật
+                                    </button>
+                                    <a th:href="@{/admin/product/product-list}" class="btn btn-secondary">
+                                        Quay lại
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:a="http://www.w3.org/1999/xhtml">
 <head th:replace="~{admin/layout :: adminHead}"></head>
 <body>
-
-
-
-
 <div th:replace="~{admin/layout :: layout(~{::section})}">
     <section class="py-4">
         <div class="container-fluid mt-4">
             <h3 class="mb-4">Quản lý danh mục</h3>
-
+            <a th:href="@{/admin/category/create}" class="btn btn-success">
+                Thêm
+            </a>
             <div class="card">
                 <div class="card-body p-0">
                     <table class="table table-bordered table-hover mb-0">
@@ -46,12 +45,24 @@
                             </td>
 
                             <td>
-                                <button class="btn btn-sm btn-warning">Sửa</button>
-                                <button class="btn btn-sm btn-danger">Xoá</button>
+                                <a th:href="@{/admin/category/edit-form(id=${category.id})}"
+                                   class="btn btn-sm btn-warning">
+                                    Sửa
+                                </a>
+
+                                <form th:action="@{/admin/category/delete/{id}(id=${category.id})}"
+                                      method="post"
+                                      style="display: inline;">
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger"
+                                            th:attr="data-name=${category.name}"
+                                            onclick="return confirmDelete(this)">
+                                        Xóa
+                                    </button>
+                                </form>
                             </td>
                         </tr>
 
-                        <!-- Trường hợp không có dữ liệu -->
                         <tr th:if="${categories.isEmpty()}">
                             <td colspan="5" class="text-center py-5 text-muted">
                                 Chưa có danh mục nào
@@ -66,3 +77,9 @@
 </div>
 </body>
 </html>
+<script>
+    function confirmDelete(button) {
+        const name = button.getAttribute('data-name');
+        return confirm('Bạn có chắc muốn xóa danh mục "' + name + '" không?');
+    }
+</script>
